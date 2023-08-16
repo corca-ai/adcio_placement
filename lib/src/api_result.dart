@@ -29,15 +29,16 @@ class AdcioSuggestionRawData {
 class AdcioSuggestion {
   final Map<String, dynamic> logOptions;
   final Product? product;
-  final Map<String, dynamic>? banner;
+  final Banner? banner;
 
   AdcioSuggestion({required this.logOptions, this.product, this.banner});
 
   factory AdcioSuggestion.fromJson(Map<String, dynamic> json) {
     return AdcioSuggestion(
       logOptions: json['logOptions'],
-      product: Product.fromMap(json['product']),
-      banner: json['banner'],
+      product:
+          json['product'] != null ? Product.fromMap(json['product']) : null,
+      banner: json['banner'] != null ? Banner.fromMap(json['banner']) : null,
     );
   }
 }
@@ -56,8 +57,8 @@ class Product {
   final String? url;
   final String? deepLink;
   final String? caption;
-  final String? createdAt;
-  final String? updatedAt;
+  final String createdAt;
+  final String updatedAt;
 
   Product({
     required this.id,
@@ -149,8 +150,8 @@ class Product {
       url: map['url'] != null ? map['url'] as String : null,
       deepLink: map['deepLink'] != null ? map['deepLink'] as String : null,
       caption: map['caption'] != null ? map['caption'] as String : null,
-      createdAt: map['createdAt'] != null ? map['createdAt'] as String : null,
-      updatedAt: map['updatedAt'] != null ? map['updatedAt'] as String : null,
+      createdAt: map['createdAt'] as String,
+      updatedAt: map['updatedAt'] as String,
     );
   }
 
@@ -202,5 +203,127 @@ class Product {
         caption.hashCode ^
         createdAt.hashCode ^
         updatedAt.hashCode;
+  }
+}
+
+class Banner {
+  final String id;
+  final String clientId;
+  final String imageUrl;
+  final String url;
+  final Map? data;
+  final bool activated;
+  final String startsAt;
+  final String? endsAt;
+  final String createdAt;
+  final String deletedAt;
+
+  Banner({
+    required this.id,
+    required this.clientId,
+    required this.imageUrl,
+    required this.url,
+    required this.data,
+    required this.activated,
+    required this.startsAt,
+    required this.endsAt,
+    required this.createdAt,
+    required this.deletedAt,
+  });
+
+  Banner copyWith({
+    String? id,
+    String? clientId,
+    String? imageUrl,
+    String? url,
+    Map? data,
+    bool? activated,
+    String? startsAt,
+    String? endsAt,
+    String? createdAt,
+    String? deletedAt,
+  }) {
+    return Banner(
+      id: id ?? this.id,
+      clientId: clientId ?? this.clientId,
+      imageUrl: imageUrl ?? this.imageUrl,
+      url: url ?? this.url,
+      data: data ?? this.data,
+      activated: activated ?? this.activated,
+      startsAt: startsAt ?? this.startsAt,
+      endsAt: endsAt ?? this.endsAt,
+      createdAt: createdAt ?? this.createdAt,
+      deletedAt: deletedAt ?? this.deletedAt,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'clientId': clientId,
+      'imageUrl': imageUrl,
+      'url': url,
+      'data': data.toString(),
+      'activated': activated,
+      'startsAt': startsAt,
+      'endsAt': endsAt,
+      'createdAt': createdAt,
+      'deletedAt': deletedAt,
+    };
+  }
+
+  factory Banner.fromMap(Map<String, dynamic> map) {
+    return Banner(
+      id: map['id'] as String,
+      clientId: map['clientId'] as String,
+      imageUrl: map['imageUrl'] as String,
+      url: map['url'] as String,
+      data: map['data'] != null ? (map['data'] as Map<String, dynamic>) : null,
+      activated: map['activated'] as bool,
+      startsAt: map['startsAt'] as String,
+      endsAt: map['endsAt'] != null ? map['endsAt'] as String : null,
+      createdAt: map['createdAt'] as String,
+      deletedAt: map['deletedAt'] as String,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Banner.fromJson(String source) =>
+      Banner.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'Banner(id: $id, clientId: $clientId, imageUrl: $imageUrl, url: $url, data: $data, activated: $activated, startsAt: $startsAt, endsAt: $endsAt, createdAt: $createdAt, deletedAt: $deletedAt)';
+  }
+
+  @override
+  bool operator ==(covariant Banner other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id &&
+        other.clientId == clientId &&
+        other.imageUrl == imageUrl &&
+        other.url == url &&
+        other.data == data &&
+        other.activated == activated &&
+        other.startsAt == startsAt &&
+        other.endsAt == endsAt &&
+        other.createdAt == createdAt &&
+        other.deletedAt == deletedAt;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        clientId.hashCode ^
+        imageUrl.hashCode ^
+        url.hashCode ^
+        data.hashCode ^
+        activated.hashCode ^
+        startsAt.hashCode ^
+        endsAt.hashCode ^
+        createdAt.hashCode ^
+        deletedAt.hashCode;
   }
 }

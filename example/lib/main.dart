@@ -47,6 +47,20 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('ADCIO placement demo'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              adcioSuggest(
+                placementId: '9f9f9b00-dc16-41c7-a5cd-f9a788d3d481',
+                baseUrl: 'https://api-dev.adcio.ai',
+              ).then((value) {
+                rawData = value;
+                setState(() {});
+              });
+            },
+            icon: const Icon(Icons.refresh),
+          ),
+        ],
       ),
       body: rawData == null
           ? const Center(child: CircularProgressIndicator())

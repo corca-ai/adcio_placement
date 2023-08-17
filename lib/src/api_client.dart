@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:adcio_placement/src/api_result.dart';
+import 'package:adcio_placement/src/error.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
 
@@ -51,6 +52,10 @@ class ApiClient {
 
     if (response.statusCode == 200) {
       return AdcioSuggestionRawData.fromJson(response.body);
+    } else if (response.statusCode == 400) {
+      throw UnregisteredIdException(
+        code: 'BAD_REQUEST',
+      );
     } else {
       throw PlatformException(
         code: 'SYSTEM_ERROR',

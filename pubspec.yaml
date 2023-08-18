@@ -1,18 +1,17 @@
 name: adcio_placement
-description: A new Flutter plugin project.
+description: This is the placement service for the ADCIO project in Flutter.
 version: 0.0.1
-homepage:
+homepage: https://github.com/corca-ai/adcio_placement
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
   flutter: ">=3.3.0"
 
 dependencies:
-  device_info_plus: ^9.0.3
   flutter:
     sdk: flutter
   http: ^1.1.0
-  plugin_platform_interface: ^2.0.2
+  device_info_plus: ^9.0.3
   uuid: ^3.0.7
 
 dev_dependencies:

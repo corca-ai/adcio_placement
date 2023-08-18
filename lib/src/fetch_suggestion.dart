@@ -1,14 +1,12 @@
-import 'dart:io';
 import 'dart:ui';
 
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:uuid/uuid.dart';
+import 'package:adcio_placement/src/adcio_suggestion_info.dart';
+import 'package:adcio_placement/src/utils.dart';
 
 import 'api_client.dart';
 import 'api_result.dart';
 
-String? _sessionId;
-String? _deviceId;
+AdcioSuggestionInfo suggestionInfo = AdcioSuggestionInfo();
 
 Future<AdcioSuggestionRawData> adcioSuggest({
   required String placementId,
@@ -18,12 +16,17 @@ Future<AdcioSuggestionRawData> adcioSuggest({
   String? customerId,
   String? gender,
   Offset? placementPosition,
+  ApiClient? apiClient,
+  AdcioSuggestionInfo? fetchInfo,
 }) async {
-  final client = ApiClient(baseUrl: baseUrl);
+  final client = apiClient ?? ApiClient(baseUrl: baseUrl);
+  if (fetchInfo != null) {
+    suggestionInfo = fetchInfo;
+  }
 
   return client.suggestion(
-    sessionId: getSessionId(),
-    deviceId: await getDeviceId(),
+    sessionId: suggestionInfo.getSessionId(),
+    deviceId: await suggestionInfo.getDeviceId(),
     placementId: placementId,
     fromAgent: false,
     age: age,
@@ -35,30 +38,3 @@ Future<AdcioSuggestionRawData> adcioSuggest({
     placementPosition: convertListByOffset(placementPosition) ?? [0, 0, 0, 0],
   );
 }
-
-String getSessionId() {
-  _sessionId ??= const Uuid().v4();
-  return _sessionId!;
-}
-
-Future<String> getDeviceId() async {
-  _deviceId ??= await _fetchDeviceId();
-  return _deviceId!;
-}
-
-Future<String> _fetchDeviceId() async {
-  final deviceInfo = DeviceInfoPlugin();
-
-  if (Platform.isAndroid) {
-    final info = await deviceInfo.androidInfo;
-    return info.id;
-  } else if (Platform.isIOS) {
-    final info = await deviceInfo.iosInfo;
-    return info.identifierForVendor ?? '${DateTime.now()}';
-  } else {
-    return '${DateTime.now()}';
-  }
-}
-
-List<int>? convertListByOffset(Offset? offset) =>
-    (offset is Offset) ? [offset.dx.toInt(), offset.dy.toInt()] : null;

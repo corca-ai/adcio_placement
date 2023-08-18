@@ -53,9 +53,7 @@ class ApiClient {
     if (response.statusCode == 200) {
       return AdcioSuggestionRawData.fromJson(response.body);
     } else if (response.statusCode == 400) {
-      throw UnregisteredIdException(
-        code: 'BAD_REQUEST',
-      );
+      throw UnregisteredIdException();
     } else {
       throw PlatformException(
         code: 'SYSTEM_ERROR',

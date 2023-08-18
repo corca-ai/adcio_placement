@@ -6,7 +6,13 @@ import 'package:adcio_placement/src/utils.dart';
 import 'api_client.dart';
 import 'api_result.dart';
 
-AdcioSuggestionInfo suggestionInfo = AdcioSuggestionInfo();
+AdcioSuggestionInfo adcioInfo = AdcioSuggestionInfo();
+
+String getSessionId([AdcioSuggestionInfo? otherInfo]) =>
+    (otherInfo == null) ? adcioInfo.getSessionId() : otherInfo.getSessionId();
+
+Future<String> getDeviceId([AdcioSuggestionInfo? info]) =>
+    (info == null) ? adcioInfo.getDeviceId() : info.getDeviceId();
 
 Future<AdcioSuggestionRawData> adcioSuggest({
   required String placementId,
@@ -17,16 +23,14 @@ Future<AdcioSuggestionRawData> adcioSuggest({
   String? gender,
   Offset? placementPosition,
   ApiClient? apiClient,
-  AdcioSuggestionInfo? fetchInfo,
+  AdcioSuggestionInfo? otherInfo,
 }) async {
   final client = apiClient ?? ApiClient(baseUrl: baseUrl);
-  if (fetchInfo != null) {
-    suggestionInfo = fetchInfo;
-  }
+  final info = otherInfo ?? adcioInfo;
 
   return client.suggestion(
-    sessionId: suggestionInfo.getSessionId(),
-    deviceId: await suggestionInfo.getDeviceId(),
+    sessionId: getSessionId(info),
+    deviceId: await getDeviceId(info),
     placementId: placementId,
     fromAgent: false,
     age: age,

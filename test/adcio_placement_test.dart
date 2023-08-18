@@ -4,6 +4,7 @@ import 'package:adcio_placement/src/api_client.dart';
 import 'package:adcio_placement/src/error.dart';
 @GenerateNiceMocks([MockSpec<AdcioSuggestionInfo>()])
 import 'package:adcio_placement/src/adcio_suggestion_info.dart';
+import 'package:adcio_placement/src/fetch_suggestion.dart';
 import 'package:adcio_placement/src/utils.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -47,9 +48,10 @@ void main() {
   ).thenThrow(UnregisteredIdException());
 
   test('Verifying if the sessionId remains the same during runtime', () {
-    final sessionId = mockSuggestionInfo.getSessionId();
+    final sessionId = getSessionId(mockSuggestionInfo);
 
     expect(sessionId, mockSuggestionInfo.getSessionId());
+    expect(sessionId, getSessionId(mockSuggestionInfo));
   });
 
   test('convert from offset to List<int>', () {
@@ -65,7 +67,7 @@ void main() {
       await adcioSuggest(
         placementId: '9f9f9b00-dc16-41c7-a5cd-f9a788d3d481',
         apiClient: mockApiClient,
-        fetchInfo: mockSuggestionInfo,
+        otherInfo: mockSuggestionInfo,
       ),
       isInstanceOf<AdcioSuggestionRawData>(),
     );
@@ -78,7 +80,7 @@ void main() {
       adcioSuggest(
         placementId: 'test_UUID',
         apiClient: mockApiClient,
-        fetchInfo: mockSuggestionInfo,
+        otherInfo: mockSuggestionInfo,
       ),
       throwsA(isInstanceOf<UnregisteredIdException>()),
     );

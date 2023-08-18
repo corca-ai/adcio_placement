@@ -1,18 +1,80 @@
-# adcio_placement
+#  adcio_placement
 
-A new Flutter plugin project.
+A Flutter plugin that provides a ADCIO placement service.  
+It smartly predicts products with high click or purchase probabilities from the client's products and returns the product information.
 
-## Getting Started
+|             | Android        | iOS   |
+|-------------|----------------|-------|
+| **Support** | SDK 19+  | all |
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+</br>
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Usage
 
-The plugin project was generated without specifying the `--platforms` flag, no platforms are currently supported.
-To add platforms, run `flutter create -t plugin --platforms <platforms> .` in this directory.
-You can also find a detailed instruction on how to add platforms in the `pubspec.yaml` at https://flutter.dev/docs/development/packages-and-plugins/developing-packages#plugin-platforms.
+### Installation
+
+Add `adcio_placement` as a [dependency in your pubspec.yaml file](https://pub.dev/packages/adcio_placement/install).
+
+### Android
+
+This plugin uses
+[device_info_plus](https://pub.dev/packages/device_info_plus).   
+In `android/app/build.gradle` you need to set `minSdkVersion` like this:
+
+```groovy
+android {
+    defaultConfig {
+        minSdkVersion 19
+    }
+}
+```
+
+### Sample Usage
+
+get `adcioSuggest()` result:
+```dart
+...
+class _HomePageState extends State<HomePage> {
+  AdcioSuggestionRawData? rawData;
+
+  @override
+  void initState() {
+    super.initState();
+
+    /// call adcioSuggest() here
+    adcioSuggest(
+      placementId: '9f9f9b00-dc16-41c7-a5cd-f9a788d3d481',
+      baseUrl: 'https://api-dev.adcio.ai',
+    ).then((value) {
+      rawData = value;
+      setState(() {});
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('ADCIO placement demo'),
+      ),
+      body: rawData == null
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemBuilder: (context, index) => Card(
+                child: ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage(
+                      rawData!.suggestions[index].product!.image,
+                    ),
+                  ),
+                  title: Text(
+                    rawData!.suggestions[index].product!.name,
+                  ),
+                ),
+              ),
+              itemCount: rawData!.suggestions.length,
+            ),
+    );
+  }
+}
+```

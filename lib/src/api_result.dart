@@ -1,8 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+/// Fetch a personalized suggestion.
+/// - placement: meta data of the placement
+/// - suggestions: list of suggestions
+///   (product or banner)
 class AdcioSuggestionRawData {
+  /// It returns personalized product or banner information.
   final List<AdcioSuggestion> suggestions;
+
+  /// meta data of the placement
   final Map<String, dynamic> placement;
 
   AdcioSuggestionRawData({
@@ -27,8 +34,14 @@ class AdcioSuggestionRawData {
 }
 
 class AdcioSuggestion {
+  /// This is the log option information to be
+  /// used in [adcio_analytics](https://pub.dev/packages/adcio_analytics)
   final Map<String, dynamic> logOptions;
+
+  /// personalized product
   final Product? product;
+
+  /// personalized banner
   final Banner? banner;
 
   AdcioSuggestion({required this.logOptions, this.product, this.banner});

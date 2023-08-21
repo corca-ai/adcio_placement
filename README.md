@@ -41,6 +41,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
+    ///
     /// call adcioSuggest() here
     adcioSuggest(
       placementId: '9f9f9b00-dc16-41c7-a5cd-f9a788d3d481',
@@ -56,11 +57,47 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('ADCIO placement demo'),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(48.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              ///
+              /// get session ID and device ID
+              TextButton(
+                onPressed: () {
+                  final result = getSessionId();
+                  ScaffoldMessenger.of(context).clearSnackBars();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(result),
+                    ),
+                  );
+                },
+                child: const Text('Session ID'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  final result = await getDeviceId();
+                  ScaffoldMessenger.of(context).clearSnackBars();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(result),
+                    ),
+                  );
+                },
+                child: const Text('device ID'),
+              ),
+            ],
+          ),
+        ),
       ),
       body: rawData == null
           ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
               itemBuilder: (context, index) => Card(
+                ///
+                /// used suggestion data
                 child: ListTile(
                   leading: CircleAvatar(
                     backgroundImage: NetworkImage(

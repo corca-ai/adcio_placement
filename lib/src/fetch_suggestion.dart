@@ -47,6 +47,8 @@ Future<AdcioSuggestionRawData> adcioSuggest({
   final client = apiClient ?? ApiClient(baseUrl: baseUrl);
   final info = otherInfo ?? adcioInfo;
 
+  AdcioAnalytics.clearImpressionHistory();
+
   return client.suggestion(
     sessionId: getSessionId(info),
     deviceId: await getDeviceId(info),

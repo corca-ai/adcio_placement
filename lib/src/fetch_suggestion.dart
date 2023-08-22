@@ -1,7 +1,7 @@
 import 'dart:ui';
 
+import 'package:adcio_analytics/adcio_analytics.dart';
 import 'package:adcio_placement/src/adcio_suggestion_info.dart';
-import 'package:adcio_placement/src/utils.dart';
 
 import 'api_client.dart';
 import 'api_result.dart';
@@ -56,8 +56,7 @@ Future<AdcioSuggestionRawData> adcioSuggest({
     area: area,
     customerId: customerId,
     gender: gender,
-
-    /// FIXME: default value인 [0,0,0,0] 사라질 예정
-    placementPosition: convertListByOffset(placementPosition) ?? [0, 0, 0, 0],
+    placementPosX: placementPosition?.dx.toInt(),
+    placementPosY: placementPosition?.dy.toInt(),
   );
 }

@@ -4,10 +4,11 @@ packages:
   adcio_analytics:
     dependency: transitive
     description:
-      name: adcio_analytics
-      sha256: b0b8c8eba015f2979116cd6de46a89adf6629712e330abf9251cebca574cfedf
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: main
+      resolved-ref: b39d9a91d6f2f88b39cd6c54c87887565d194805
+      url: "https://github.com/corca-ai/adcio_analytics"
+    source: git
     version: "0.2.1"
   adcio_placement:
     dependency: "direct main"

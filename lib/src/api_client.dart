@@ -24,7 +24,7 @@ class ApiClient {
     String? gender,
     String? area,
   }) async {
-    final url = '$_baseUrl/suggestion';
+    final url = '$_baseUrl/suggestions';
 
     final params = <String, dynamic>{};
     params['sessionId'] = sessionId;
@@ -51,12 +51,12 @@ class ApiClient {
     }
 
     final response = await _request(
-      method: _RequestMethod.get,
+      method: _RequestMethod.post,
       url: url,
       params: params,
     );
 
-    if (response.statusCode == 200) {
+    if ([200, 201].contains(response.statusCode)) {
       return AdcioSuggestionRawData.fromJson(response.body);
     } else if (response.statusCode == 400) {
       throw UnregisteredIdException();
@@ -72,7 +72,7 @@ class ApiClient {
   }
 }
 
-enum _RequestMethod { get }
+enum _RequestMethod { get, post }
 
 class _ApiRequest {
   _ApiRequest(Client client) : _client = client;
@@ -81,7 +81,7 @@ class _ApiRequest {
 
   Future<_ApiResponse> call({
     required _RequestMethod method,
-    Map<String, String>? headers,
+    Map<String, String>? headers = const {'content-type': 'application/json'},
     required String url,
     Map<String, dynamic>? params,
   }) async {
@@ -108,6 +108,14 @@ class _ApiRequest {
           Uri.parse(url),
           headers: headers,
         );
+        break;
+      case _RequestMethod.post:
+        result = _client.post(
+          Uri.parse(url),
+          headers: headers,
+          body: json.encode(params),
+        );
+
         break;
     }
 

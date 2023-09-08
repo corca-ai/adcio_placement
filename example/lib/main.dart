@@ -39,8 +39,7 @@ class _HomePageState extends State<HomePage> {
     ///
     /// call adcioSuggest() here
     adcioSuggest(
-      placementId: '9f9f9b00-dc16-41c7-a5cd-f9a788d3d481',
-      baseUrl: 'https://api-dev.adcio.ai',
+      placementId: '67592c00-a230-4c31-902e-82ae4fe71866',
     ).then((value) {
       rawData = value;
       setState(() {});

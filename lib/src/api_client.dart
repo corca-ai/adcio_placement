@@ -112,7 +112,7 @@ class _ApiRequest {
       case _RequestMethod.post:
         result = _client.post(
           Uri.parse(url),
-          headers: {'Content-Type': 'application/json'},
+          headers: headers,
           body: json.encode(params),
         );
 

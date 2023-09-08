@@ -81,7 +81,7 @@ class _ApiRequest {
 
   Future<_ApiResponse> call({
     required _RequestMethod method,
-    Map<String, String>? headers,
+    Map<String, String>? headers = const {'content-type': 'application/json'},
     required String url,
     Map<String, dynamic>? params,
   }) async {

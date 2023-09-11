@@ -1,3 +1,7 @@
+## 0.1.2
+
+* Feature: update /suggest API call 
+
 ## 0.1.1
 
 * chnage package project type

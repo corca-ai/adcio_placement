@@ -12,38 +12,40 @@ import 'package:mockito/mockito.dart';
 import 'adcio_placement_test.mocks.dart';
 import 'suggestion_data.dart';
 
-void main() {
+void main() async {
   final ApiClient mockApiClient = MockApiClient();
   final AdcioSuggestionInfo mockSuggestionInfo = MockAdcioSuggestionInfo();
 
-  // add mock the sessionId and deviceId
-  when(mockSuggestionInfo.getSessionId())
-      .thenAnswer((_) => 'a3e0efcc-bbed-4c73-b001-cd3d0c54e7a6');
-  when(mockSuggestionInfo.getDeviceId()).thenAnswer(
-    (_) async => '6D79D039-3FE3-4887-B0BC-FDDCBD758C99',
-  );
+  setUp(() {
+    // add mock the sessionId and deviceId
+    when(mockSuggestionInfo.getSessionId())
+        .thenAnswer((_) => 'a3e0efcc-bbed-4c73-b001-cd3d0c54e7a6');
+    when(mockSuggestionInfo.getDeviceId()).thenAnswer(
+      (_) async => '6D79D039-3FE3-4887-B0BC-FDDCBD758C99',
+    );
 
-  // success case (call the suggestion api)
-  when(
-    mockApiClient.suggestion(
-      sessionId: 'a3e0efcc-bbed-4c73-b001-cd3d0c54e7a6',
-      deviceId: '6D79D039-3FE3-4887-B0BC-FDDCBD758C99',
-      placementId: '9f9f9b00-dc16-41c7-a5cd-f9a788d3d481',
-      fromAgent: false,
-    ),
-  ).thenAnswer(
-    (_) async => AdcioSuggestionRawData.fromJson(suggestionResponse),
-  );
+    // success case (call the suggestion api)
+    when(
+      mockApiClient.suggestion(
+        sessionId: 'a3e0efcc-bbed-4c73-b001-cd3d0c54e7a6',
+        deviceId: '6D79D039-3FE3-4887-B0BC-FDDCBD758C99',
+        placementId: '9f9f9b00-dc16-41c7-a5cd-f9a788d3d481',
+        fromAgent: false,
+      ),
+    ).thenAnswer(
+      (_) async => AdcioSuggestionRawData.fromJson(suggestionResponse),
+    );
 
-  // error case (call the suggestion api)
-  when(
-    mockApiClient.suggestion(
-      sessionId: 'a3e0efcc-bbed-4c73-b001-cd3d0c54e7a6',
-      deviceId: '6D79D039-3FE3-4887-B0BC-FDDCBD758C99',
-      placementId: 'test_UUID',
-      fromAgent: false,
-    ),
-  ).thenThrow(UnregisteredIdException());
+    // error case (call the suggestion api)
+    when(
+      mockApiClient.suggestion(
+        sessionId: 'a3e0efcc-bbed-4c73-b001-cd3d0c54e7a6',
+        deviceId: '6D79D039-3FE3-4887-B0BC-FDDCBD758C99',
+        placementId: 'test_UUID',
+        fromAgent: false,
+      ),
+    ).thenThrow(UnregisteredIdException());
+  });
 
   test('Verifying if the sessionId remains the same during runtime', () {
     final sessionId = getSessionId(mockSuggestionInfo);
@@ -71,11 +73,10 @@ void main() {
     );
   });
 
-  /// FIXME: This test case is not working
   test('When the provided placementId is not registered in the ADCIO service',
-      () async {
+      () {
     expect(
-      adcioSuggest(
+      () => adcioSuggest(
         placementId: 'test_UUID',
         apiClient: mockApiClient,
         otherInfo: mockSuggestionInfo,

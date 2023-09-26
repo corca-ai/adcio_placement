@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:adcio_analytics/adcio_analytics.dart';
+import 'package:adcio_core/adcio_core.dart';
 
 import 'api_client.dart';
 import 'api_result.dart';
@@ -33,14 +34,16 @@ Future<AdcioSuggestionRawData> adcioSuggest({
   String? gender,
   Offset? placementPosition,
   ApiClient? apiClient,
+  String? deviceId,
+  String? sessionId,
 }) async {
   final client = apiClient ?? ApiClient(baseUrl: baseUrl);
 
   AdcioAnalytics.clearImpressionHistory();
 
   return client.suggestion(
-    sessionId: ,
-    deviceId: ,
+    sessionId: sessionId ?? AdcioCore.sessionId,
+    deviceId: deviceId ?? AdcioCore.deviceId,
     placementId: placementId,
     fromAgent: false,
     age: age,

@@ -1,18 +1,10 @@
 import 'dart:ui';
 
 import 'package:adcio_analytics/adcio_analytics.dart';
-import 'package:adcio_placement/src/adcio_suggestion_info.dart';
+import 'package:adcio_core/adcio_core.dart';
 
 import 'api_client.dart';
 import 'api_result.dart';
-
-AdcioSuggestionInfo adcioInfo = AdcioSuggestionInfo();
-
-String getSessionId([AdcioSuggestionInfo? otherInfo]) =>
-    (otherInfo == null) ? adcioInfo.getSessionId() : otherInfo.getSessionId();
-
-Future<String> getDeviceId([AdcioSuggestionInfo? info]) =>
-    (info == null) ? adcioInfo.getDeviceId() : info.getDeviceId();
 
 /// ADCIO suggest placement service.
 ///
@@ -42,16 +34,16 @@ Future<AdcioSuggestionRawData> adcioSuggest({
   String? gender,
   Offset? placementPosition,
   ApiClient? apiClient,
-  AdcioSuggestionInfo? otherInfo,
+  String? deviceId,
+  String? sessionId,
 }) async {
   final client = apiClient ?? ApiClient(baseUrl: baseUrl);
-  final info = otherInfo ?? adcioInfo;
 
   AdcioAnalytics.clearImpressionHistory();
 
   return client.suggestion(
-    sessionId: getSessionId(info),
-    deviceId: await getDeviceId(info),
+    sessionId: sessionId ?? AdcioCore.sessionId,
+    deviceId: deviceId ?? AdcioCore.deviceId,
     placementId: placementId,
     fromAgent: false,
     age: age,

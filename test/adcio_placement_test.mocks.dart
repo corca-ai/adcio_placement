@@ -5,7 +5,6 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:adcio_placement/src/adcio_suggestion_info.dart' as _i5;
 import 'package:adcio_placement/src/api_client.dart' as _i3;
 import 'package:adcio_placement/src/api_result.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -107,29 +106,4 @@ class MockApiClient extends _i1.Mock implements _i3.ApiClient {
           ),
         )),
       ) as _i4.Future<_i2.AdcioSuggestionRawData>);
-}
-
-/// A class which mocks [AdcioSuggestionInfo].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockAdcioSuggestionInfo extends _i1.Mock
-    implements _i5.AdcioSuggestionInfo {
-  @override
-  String getSessionId() => (super.noSuchMethod(
-        Invocation.method(
-          #getSessionId,
-          [],
-        ),
-        returnValue: '',
-        returnValueForMissingStub: '',
-      ) as String);
-  @override
-  _i4.Future<String> getDeviceId() => (super.noSuchMethod(
-        Invocation.method(
-          #getDeviceId,
-          [],
-        ),
-        returnValue: _i4.Future<String>.value(''),
-        returnValueForMissingStub: _i4.Future<String>.value(''),
-      ) as _i4.Future<String>);
 }

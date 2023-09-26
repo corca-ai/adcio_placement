@@ -23,7 +23,7 @@ final suggestionResponse = {
       },
       "product": {
         "id": "8cc22880-f58a-43f0-b3de-a23d3ecf0bf5",
-        "code": "302795144",
+        "idOnStore": "302795144",
         "storeId": "30cb6fd0-17a5-4c56-b144-fef67de81bef",
         "sellerId": "30cb6fd0-17a5-4c56-b144-fef67de81bef",
         "name": "키홀 페인트 레터링 티셔츠 화이트 SETS008WHITE",
@@ -53,7 +53,7 @@ final suggestionResponse = {
       },
       "product": {
         "id": "9db03339-7e81-4e11-a130-39a3fab3a096",
-        "code": "302673758",
+        "idOnStore": "302673758",
         "storeId": "30cb6fd0-17a5-4c56-b144-fef67de81bef",
         "sellerId": "30cb6fd0-17a5-4c56-b144-fef67de81bef",
         "name": "AX자수 로고 패턴 후드 티셔츠A423131502-화이트",
@@ -84,7 +84,7 @@ final suggestionResponse = {
       },
       "product": {
         "id": "f2ed8893-f5a1-4ee2-941e-ebe7572ab8c2",
-        "code": "302529135",
+        "idOnStore": "302529135",
         "storeId": "30cb6fd0-17a5-4c56-b144-fef67de81bef",
         "sellerId": "30cb6fd0-17a5-4c56-b144-fef67de81bef",
         "name": "코튼 티셔츠 화이트 1150469002",

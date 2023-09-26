@@ -1,9 +1,17 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:adcio_core/adcio_core.dart';
 import 'package:adcio_placement/adcio_placement.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  /// this is important to call `AdcioCore.initializeApp(clientId: 'ADCIO_STORE_ID')` function.
+  await AdcioCore.initializeApp(
+    clientId: 'f8f2e298-c168-4412-b82d-98fc5b4a114a',
+  );
+
   runApp(const MyApp());
 }
 
@@ -64,40 +72,6 @@ class _HomePageState extends State<HomePage> {
             icon: const Icon(Icons.refresh),
           ),
         ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(48.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              ///
-              /// get session ID and device ID
-              TextButton(
-                onPressed: () {
-                  final result = getSessionId();
-                  ScaffoldMessenger.of(context).clearSnackBars();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(result),
-                    ),
-                  );
-                },
-                child: const Text('Session ID'),
-              ),
-              TextButton(
-                onPressed: () async {
-                  final result = await getDeviceId();
-                  ScaffoldMessenger.of(context).clearSnackBars();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(result),
-                    ),
-                  );
-                },
-                child: const Text('device ID'),
-              ),
-            ],
-          ),
-        ),
       ),
       body: rawData == null
           ? const Center(child: CircularProgressIndicator())
@@ -106,6 +80,9 @@ class _HomePageState extends State<HomePage> {
                 ///
                 /// used suggestion data
                 child: ListTile(
+                  onTap: () => debugPrint(
+                    'Product ID for your service: ${rawData!.suggestions[index].product!.idOnStore}',
+                  ),
                   leading: CircleAvatar(
                     backgroundImage: NetworkImage(
                       rawData!.suggestions[index].product!.image,

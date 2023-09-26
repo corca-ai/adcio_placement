@@ -1,3 +1,8 @@
+## 0.1.3
+
+* Change productId name productCode -> productIdOnStore
+* Update according to [adcio_core](https://central.sonatype.com/artifact/io.github.corca-ai/adcio_core) version up
+
 ## 0.1.2
 
 * Feature: update /suggest API call 

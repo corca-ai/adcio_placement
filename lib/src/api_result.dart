@@ -58,7 +58,7 @@ class AdcioSuggestion {
 
 class Product {
   final String id;
-  final String code;
+  final String idOnStore;
   final String storeId;
   final String sellerId;
   final String name;
@@ -75,7 +75,7 @@ class Product {
 
   Product({
     required this.id,
-    required this.code,
+    required this.idOnStore,
     required this.storeId,
     required this.sellerId,
     required this.name,
@@ -93,7 +93,7 @@ class Product {
 
   Product copyWith({
     String? id,
-    String? code,
+    String? idOnStore,
     String? storeId,
     String? sellerId,
     String? name,
@@ -110,7 +110,7 @@ class Product {
   }) {
     return Product(
       id: id ?? this.id,
-      code: code ?? this.code,
+      idOnStore: idOnStore ?? this.idOnStore,
       storeId: storeId ?? this.storeId,
       sellerId: sellerId ?? this.sellerId,
       name: name ?? this.name,
@@ -131,7 +131,7 @@ class Product {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'code': code,
+      'idOnStore': idOnStore,
       'storeId': storeId,
       'sellerId': sellerId,
       'name': name,
@@ -151,7 +151,7 @@ class Product {
   factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
       id: map['id'] as String,
-      code: map['code'] as String,
+      idOnStore: map['idOnStore'] as String,
       storeId: map['storeId'] as String,
       sellerId: map['sellerId'] as String,
       name: map['name'] as String,
@@ -175,7 +175,7 @@ class Product {
 
   @override
   String toString() {
-    return 'Product(id: $id, code: $code, storeId: $storeId, sellerId: $sellerId, name: $name, price: $price, description: $description, image: $image, includeInRecommendation: $includeInRecommendation, data: $data, url: $url, deepLink: $deepLink, caption: $caption, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Product(id: $id, idOnStore: $idOnStore, storeId: $storeId, sellerId: $sellerId, name: $name, price: $price, description: $description, image: $image, includeInRecommendation: $includeInRecommendation, data: $data, url: $url, deepLink: $deepLink, caption: $caption, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -183,7 +183,7 @@ class Product {
     if (identical(this, other)) return true;
 
     return other.id == id &&
-        other.code == code &&
+        other.idOnStore == idOnStore &&
         other.storeId == storeId &&
         other.sellerId == sellerId &&
         other.name == name &&
@@ -202,7 +202,7 @@ class Product {
   @override
   int get hashCode {
     return id.hashCode ^
-        code.hashCode ^
+        idOnStore.hashCode ^
         storeId.hashCode ^
         sellerId.hashCode ^
         name.hashCode ^

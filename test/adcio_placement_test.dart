@@ -1,7 +1,5 @@
 @GenerateNiceMocks([MockSpec<ApiClient>()])
 import 'package:adcio_placement/adcio_placement.dart';
-@GenerateNiceMocks([MockSpec<AdcioSuggestionInfo>()])
-import 'package:adcio_placement/src/adcio_suggestion_info.dart';
 import 'package:adcio_placement/src/api_client.dart';
 import 'package:adcio_placement/src/error.dart';
 import 'package:adcio_placement/src/utils.dart';
@@ -14,16 +12,8 @@ import 'suggestion_data.dart';
 
 void main() async {
   final ApiClient mockApiClient = MockApiClient();
-  final AdcioSuggestionInfo mockSuggestionInfo = MockAdcioSuggestionInfo();
 
   setUp(() {
-    // add mock the sessionId and deviceId
-    when(mockSuggestionInfo.getSessionId())
-        .thenAnswer((_) => 'a3e0efcc-bbed-4c73-b001-cd3d0c54e7a6');
-    when(mockSuggestionInfo.getDeviceId()).thenAnswer(
-      (_) async => '6D79D039-3FE3-4887-B0BC-FDDCBD758C99',
-    );
-
     // success case (call the suggestion api)
     when(
       mockApiClient.suggestion(
@@ -47,13 +37,6 @@ void main() async {
     ).thenThrow(UnregisteredIdException());
   });
 
-  test('Verifying if the sessionId remains the same during runtime', () {
-    final sessionId = getSessionId(mockSuggestionInfo);
-
-    expect(sessionId, mockSuggestionInfo.getSessionId());
-    expect(sessionId, getSessionId(mockSuggestionInfo));
-  });
-
   test('convert from offset to List<int>', () {
     const placementPosition = Offset(20, 560);
     final result = convertListByOffset(placementPosition);
@@ -67,7 +50,8 @@ void main() async {
       await adcioSuggest(
         placementId: '9f9f9b00-dc16-41c7-a5cd-f9a788d3d481',
         apiClient: mockApiClient,
-        otherInfo: mockSuggestionInfo,
+        sessionId: 'a3e0efcc-bbed-4c73-b001-cd3d0c54e7a6',
+        deviceId: '6D79D039-3FE3-4887-B0BC-FDDCBD758C99',
       ),
       isInstanceOf<AdcioSuggestionRawData>(),
     );
@@ -79,7 +63,8 @@ void main() async {
       () => adcioSuggest(
         placementId: 'test_UUID',
         apiClient: mockApiClient,
-        otherInfo: mockSuggestionInfo,
+        sessionId: 'a3e0efcc-bbed-4c73-b001-cd3d0c54e7a6',
+        deviceId: '6D79D039-3FE3-4887-B0BC-FDDCBD758C99',
       ),
       throwsA(isInstanceOf<UnregisteredIdException>()),
     );

@@ -1,116 +1,26 @@
-#  adcio_placement
+# adcio_placement
+[![pub package](https://img.shields.io/pub/v/adcio_placement.svg)](https://pub.dev/packages/adcio_placement)
 
-A Flutter plugin that provides a ADCIO placement service.  
-It smartly predicts products with high click or purchase probabilities from the client's products and returns the product information.
+A Flutter plugin that provides a ADCIO placement service. It smartly predicts products with high click or purchase probabilities from the client's products and returns the product information.
 
-|             | Android        | iOS   |
-|-------------|----------------|-------|
-| **Support** | SDK 19+  | all |
+To learn more about ADCIO, please visit the [ADCIO website](https://www.adcio.ai/)
 
-</br>
+## Getting Started
+To get started with ADCIO account, please register [ADCIO account](https://app.adcio.ai/en/)
 
 ## Usage
+There is a simple use example:
 
-### Installation
-
-Add `adcio_placement` as a [dependency in your pubspec.yaml file](https://pub.dev/packages/adcio_placement/install).
-
-### Android
-
-This plugin uses
-[device_info_plus](https://pub.dev/packages/device_info_plus).   
-In `android/app/build.gradle` you need to set `minSdkVersion` like this:
-
-```groovy
-android {
-    defaultConfig {
-        minSdkVersion 19
-    }
-}
-```
-
-### Sample Usage
-
-get `adcioSuggest()` result:
 ```dart
-...
-class _HomePageState extends State<HomePage> {
-  AdcioSuggestionRawData? rawData;
+import 'package:adcio_placement/adcio_placement.dart';
 
-  @override
-  void initState() {
-    super.initState();
-
-    ///
-    /// call adcioSuggest() here
-    adcioSuggest(
-      placementId: '67592c00-a230-4c31-902e-82ae4fe71866',
-    ).then((value) {
-      rawData = value;
-      setState(() {});
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('ADCIO placement demo'),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(48.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              ///
-              /// get session ID and device ID
-              TextButton(
-                onPressed: () {
-                  final result = getSessionId();
-                  ScaffoldMessenger.of(context).clearSnackBars();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(result),
-                    ),
-                  );
-                },
-                child: const Text('Session ID'),
-              ),
-              TextButton(
-                onPressed: () async {
-                  final result = await getDeviceId();
-                  ScaffoldMessenger.of(context).clearSnackBars();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(result),
-                    ),
-                  );
-                },
-                child: const Text('device ID'),
-              ),
-            ],
-          ),
-        ),
-      ),
-      body: rawData == null
-          ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemBuilder: (context, index) => Card(
-                ///
-                /// used suggestion data
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      rawData!.suggestions[index].product!.image,
-                    ),
-                  ),
-                  title: Text(
-                    rawData!.suggestions[index].product!.name,
-                  ),
-                ),
-              ),
-              itemCount: rawData!.suggestions.length,
-            ),
-    );
-  }
-}
+adcioSuggest(
+  placementId: '...',
+).then((result) {
+  AdcioSuggestionRawData adcioSuggestionRaw = result;
+});
 ```
+To learn more about usage of plugin, please visit the [adcio_placement Usage documentation.](https://docs.adcio.ai/en/sdk/suggestions/flutter)
+
+## Issues and feedback
+If the plugin has issues, bugs, feedback, Please contact <dev@corca.ai>.

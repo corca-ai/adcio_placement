@@ -1,3 +1,7 @@
+## 0.1.4
+
+* Feature: update suggest API call 
+
 ## 0.1.3
 
 * Change productId name productCode -> productIdOnStore

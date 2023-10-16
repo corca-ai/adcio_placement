@@ -224,19 +224,25 @@ class Banner {
   final String clientId;
   final String imageUrl;
   final String url;
+  final String name;
   final Map? data;
+  final String? categoryId;
+  final String? productId;
   final bool activated;
   final String startsAt;
   final String? endsAt;
   final String createdAt;
-  final String deletedAt;
+  final String? deletedAt;
 
   Banner({
     required this.id,
     required this.clientId,
     required this.imageUrl,
     required this.url,
+    required this.name,
     required this.data,
+    this.categoryId,
+    this.productId,
     required this.activated,
     required this.startsAt,
     required this.endsAt,
@@ -249,7 +255,10 @@ class Banner {
     String? clientId,
     String? imageUrl,
     String? url,
+    String? name,
     Map? data,
+    String? categoryId,
+    String? productId,
     bool? activated,
     String? startsAt,
     String? endsAt,
@@ -261,7 +270,10 @@ class Banner {
       clientId: clientId ?? this.clientId,
       imageUrl: imageUrl ?? this.imageUrl,
       url: url ?? this.url,
+      name: name ?? this.name,
       data: data ?? this.data,
+      categoryId: categoryId ?? this.categoryId,
+      productId: productId ?? this.productId,
       activated: activated ?? this.activated,
       startsAt: startsAt ?? this.startsAt,
       endsAt: endsAt ?? this.endsAt,
@@ -276,7 +288,10 @@ class Banner {
       'clientId': clientId,
       'imageUrl': imageUrl,
       'url': url,
-      'data': data.toString(),
+      'name': name,
+      'data': data?.toString(),
+      'categoryId': categoryId,
+      'productId': productId,
       'activated': activated,
       'startsAt': startsAt,
       'endsAt': endsAt,
@@ -291,12 +306,16 @@ class Banner {
       clientId: map['clientId'] as String,
       imageUrl: map['imageUrl'] as String,
       url: map['url'] as String,
+      name: map['name'] as String,
       data: map['data'] != null ? (map['data'] as Map<String, dynamic>) : null,
+      categoryId:
+          map['categoryId'] != null ? map['categoryId'] as String : null,
+      productId: map['productId'] != null ? map['productId'] as String : null,
       activated: map['activated'] as bool,
       startsAt: map['startsAt'] as String,
       endsAt: map['endsAt'] != null ? map['endsAt'] as String : null,
       createdAt: map['createdAt'] as String,
-      deletedAt: map['deletedAt'] as String,
+      deletedAt: map['deletedAt'] != null ? map['deletedAt'] as String : null,
     );
   }
 
@@ -307,7 +326,7 @@ class Banner {
 
   @override
   String toString() {
-    return 'Banner(id: $id, clientId: $clientId, imageUrl: $imageUrl, url: $url, data: $data, activated: $activated, startsAt: $startsAt, endsAt: $endsAt, createdAt: $createdAt, deletedAt: $deletedAt)';
+    return 'Banner(id: $id, clientId: $clientId, imageUrl: $imageUrl, url: $url, name: $name, data: $data, categoryId: $categoryId, productId: $productId, activated: $activated, startsAt: $startsAt, endsAt: $endsAt, createdAt: $createdAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -318,7 +337,10 @@ class Banner {
         other.clientId == clientId &&
         other.imageUrl == imageUrl &&
         other.url == url &&
+        other.name == name &&
         other.data == data &&
+        other.categoryId == categoryId &&
+        other.productId == productId &&
         other.activated == activated &&
         other.startsAt == startsAt &&
         other.endsAt == endsAt &&
@@ -332,7 +354,10 @@ class Banner {
         clientId.hashCode ^
         imageUrl.hashCode ^
         url.hashCode ^
+        name.hashCode ^
         data.hashCode ^
+        categoryId.hashCode ^
+        productId.hashCode ^
         activated.hashCode ^
         startsAt.hashCode ^
         endsAt.hashCode ^

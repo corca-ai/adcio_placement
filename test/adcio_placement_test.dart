@@ -3,6 +3,7 @@ import 'package:adcio_core/adcio_core.dart';
 import 'package:adcio_placement/adcio_placement.dart';
 import 'package:adcio_placement/src/api_client.dart';
 import 'package:adcio_placement/src/error.dart';
+import 'package:adcio_placement/src/fetch_suggestion.dart';
 import 'package:adcio_placement/src/utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -49,7 +50,7 @@ void main() async {
       'When the suppression is called before using the AdcioCore.initializeApp() function',
       () {
     expect(
-      () => adcioSuggest(
+      () => adcioCreateSuggestion(
         placementId: '9f9f9b00-dc16-41c7-a5cd-f9a788d3d481',
         apiClient: mockApiClient,
         sessionId: AdcioCore.sessionId,
@@ -67,7 +68,7 @@ void main() async {
     );
 
     expect(
-      await adcioSuggest(
+      await adcioCreateSuggestion(
         placementId: '9f9f9b00-dc16-41c7-a5cd-f9a788d3d481',
         apiClient: mockApiClient,
         sessionId: AdcioCore.sessionId,
@@ -80,7 +81,7 @@ void main() async {
   test('When the provided placementId is registered in the ADCIO service',
       () async {
     expect(
-      await adcioSuggest(
+      await adcioCreateSuggestion(
         placementId: '9f9f9b00-dc16-41c7-a5cd-f9a788d3d481',
         apiClient: mockApiClient,
         sessionId: 'a3e0efcc-bbed-4c73-b001-cd3d0c54e7a6',
@@ -93,7 +94,7 @@ void main() async {
   test('When the provided placementId is not registered in the ADCIO service',
       () {
     expect(
-      () => adcioSuggest(
+      () => adcioCreateSuggestion(
         placementId: 'test_UUID',
         apiClient: mockApiClient,
         sessionId: 'a3e0efcc-bbed-4c73-b001-cd3d0c54e7a6',

@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:ui';
 
 import 'package:adcio_analytics/adcio_analytics.dart';
@@ -29,7 +30,7 @@ import 'api_result.dart';
 Future<AdcioSuggestionRawData> adcioCreateSuggestion({
   required String placementId,
   String? baseUrl,
-  String? age,
+  int? birthYear,
   String? area,
   String? customerId,
   GenderType? gender,
@@ -47,7 +48,7 @@ Future<AdcioSuggestionRawData> adcioCreateSuggestion({
     deviceId: deviceId ?? AdcioCore.deviceId,
     placementId: placementId,
     fromAgent: false,
-    age: age,
+    birthYear: birthYear,
     area: area,
     customerId: customerId,
     gender: gender.toString(),

@@ -20,7 +20,7 @@ class ApiClient {
     int? placementPositionX,
     int? placementPositionY,
     required bool fromAgent,
-    String? age,
+    int? birthYear,
     String? gender,
     String? area,
   }) async {
@@ -34,8 +34,8 @@ class ApiClient {
     }
     params['placementId'] = placementId;
     params['fromAgent'] = fromAgent;
-    if (age?.isNotEmpty ?? false) {
-      params['age'] = age;
+    if (birthYear != null) {
+      params['birthYear'] = birthYear;
     }
     if (gender?.isNotEmpty ?? false) {
       params['gender'] = gender;

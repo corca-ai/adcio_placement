@@ -26,7 +26,7 @@ import 'api_result.dart';
 /// Additionally, if there are user details such as customerId (similar to userId),
 /// age, gender, and information related to the space like area, as well as placementPosition,
 /// the accuracy of recommendation predictions can be further enhanced.
-Future<AdcioSuggestionRawData> adcioSuggest({
+Future<AdcioSuggestionRawData> adcioCreateSuggestion({
   required String placementId,
   String? baseUrl,
   String? age,

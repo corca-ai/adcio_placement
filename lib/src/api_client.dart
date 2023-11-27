@@ -17,8 +17,8 @@ class ApiClient {
     required String deviceId,
     String? customerId,
     required String placementId,
-    int? placementPosX,
-    int? placementPosY,
+    int? placementPositionX,
+    int? placementPositionY,
     required bool fromAgent,
     String? age,
     String? gender,
@@ -43,11 +43,11 @@ class ApiClient {
     if (area?.isNotEmpty ?? false) {
       params['area'] = area;
     }
-    if (placementPosX != null) {
-      params['placementPosX'] = placementPosX;
+    if (placementPositionX != null) {
+      params['placementPositionX'] = placementPositionX;
     }
-    if (placementPosY != null) {
-      params['placementPosY'] = placementPosY;
+    if (placementPositionY != null) {
+      params['placementPositionY'] = placementPositionY;
     }
 
     final response = await _request(

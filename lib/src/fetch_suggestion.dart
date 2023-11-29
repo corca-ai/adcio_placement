@@ -32,7 +32,7 @@ Future<AdcioSuggestionRawData> adcioCreateSuggestion({
   int? birthYear,
   String? area,
   String? customerId,
-  GenderType? gender,
+  Gender? gender,
   Offset? placementPosition,
   ApiClient? apiClient,
   String? deviceId,

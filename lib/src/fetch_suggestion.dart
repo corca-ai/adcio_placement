@@ -50,7 +50,7 @@ Future<AdcioSuggestionRawData> adcioCreateSuggestion({
     birthYear: birthYear,
     area: area,
     customerId: customerId,
-    gender: gender.toString(),
+    gender: gender?.toString(),
     placementPositionX: placementPosition?.dx.toInt(),
     placementPositionY: placementPosition?.dy.toInt(),
   );

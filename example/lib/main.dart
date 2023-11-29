@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
 
     ///
     /// call adcioSuggest() here
-    adcioSuggest(
+    adcioCreateSuggestion(
       placementId: '67592c00-a230-4c31-902e-82ae4fe71866',
     ).then((value) {
       rawData = value;
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () {
-              adcioSuggest(
+              adcioCreateSuggestion(
                 placementId: '67592c00-a230-4c31-902e-82ae4fe71866',
               ).then((value) {
                 rawData = value;

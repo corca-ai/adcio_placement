@@ -5,17 +5,25 @@ packages:
     dependency: transitive
     description:
       name: adcio_analytics
-      sha256: b0b8c8eba015f2979116cd6de46a89adf6629712e330abf9251cebca574cfedf
+      sha256: "92f1f4d2ae7c5d8a252454bcfcf235a4d7cae71efff1a17ef1fe92edd9d1b19a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.1"
+    version: "0.3.1"
+  adcio_core:
+    dependency: "direct main"
+    description:
+      name: adcio_core
+      sha256: "0d853529dd090828e20409092322803bfc1a5058c6fb758c39d0722aa8e91033"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.1"
   adcio_placement:
     dependency: "direct main"
     description:
       path: ".."
       relative: true
     source: path
-    version: "0.1.1"
+    version: "0.1.4"
   async:
     dependency: transitive
     description:
@@ -212,6 +220,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.0"
+  sprintf:
+    dependency: transitive
+    description:
+      name: sprintf
+      sha256: "1fc9ffe69d4df602376b52949af107d8f5703b77cda567c4d7d86a0693120f23"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.0"
   stack_trace:
     dependency: transitive
     description:
@@ -264,10 +280,10 @@ packages:
     dependency: transitive
     description:
       name: uuid
-      sha256: "648e103079f7c64a36dc7d39369cabb358d377078a051d6ae2ad3aa539519313"
+      sha256: df5a4d8f22ee4ccd77f8839ac7cb274ebc11ef9adcce8b92be14b797fe889921
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.7"
+    version: "4.2.1"
   vector_math:
     dependency: transitive
     description:

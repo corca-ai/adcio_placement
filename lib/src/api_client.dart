@@ -19,7 +19,7 @@ class ApiClient {
     required String placementId,
     int? placementPositionX,
     int? placementPositionY,
-    required bool fromAgent,
+    bool? fromAgent,
     int? birthYear,
     String? gender,
     String? area,
@@ -33,7 +33,11 @@ class ApiClient {
       params['customerId'] = customerId;
     }
     params['placementId'] = placementId;
-    params['fromAgent'] = fromAgent;
+
+    if (fromAgent != null) {
+      params['fromAgent'] = fromAgent;
+    }
+
     if (birthYear != null) {
       params['birthYear'] = birthYear;
     }

@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:adcio_analytics/adcio_analytics.dart';
 import 'package:adcio_core/adcio_core.dart';
-import 'package:adcio_placement/src/gender_type.dart';
+import 'package:adcio_placement/src/utils.dart';
 
 import 'api_client.dart';
 import 'api_result.dart';
@@ -32,7 +32,7 @@ Future<AdcioSuggestionRawData> adcioCreateSuggestion({
   int? birthYear,
   String? area,
   String? customerId,
-  Gender? gender,
+  String? gender,
   Offset? placementPosition,
   ApiClient? apiClient,
   String? deviceId,
@@ -50,7 +50,7 @@ Future<AdcioSuggestionRawData> adcioCreateSuggestion({
     birthYear: birthYear,
     area: area,
     customerId: customerId,
-    gender: gender?.toString(),
+    gender: convertGender(gender)?.toString(),
     placementPositionX: placementPosition?.dx.toInt(),
     placementPositionY: placementPosition?.dy.toInt(),
   );

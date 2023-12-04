@@ -42,6 +42,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   AdcioSuggestionRawData? rawData;
   late final User currenctUser;
+  late final String currentLocation;
 
   @override
   void initState() {
@@ -54,14 +55,9 @@ class _HomePageState extends State<HomePage> {
       gender: Gender.male,
     );
 
-    ///
-    /// call adcioSuggest() here
-    adcioCreateSuggestion(
-      placementId: '67592c00-a230-4c31-902e-82ae4fe71866',
-    ).then((value) {
-      rawData = value;
-      setState(() {});
-    });
+    currentLocation = 'Seoul, Korea';
+
+    suggest();
   }
 
   @override
@@ -72,12 +68,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () {
-              adcioCreateSuggestion(
-                placementId: '67592c00-a230-4c31-902e-82ae4fe71866',
-              ).then((value) {
-                rawData = value;
-                setState(() {});
-              });
+              suggest();
             },
             icon: const Icon(Icons.refresh),
           ),
@@ -106,5 +97,20 @@ class _HomePageState extends State<HomePage> {
               itemCount: rawData!.suggestions.length,
             ),
     );
+  }
+
+  ///
+  /// call adcioSuggest() here
+  void suggest() {
+    adcioCreateSuggestion(
+      placementId: '67592c00-a230-4c31-902e-82ae4fe71866',
+      customerId: currenctUser.id,
+      birthYear: currenctUser.birthDate.year,
+      gender: currenctUser.gender.name,
+      area: currentLocation,
+    ).then((value) {
+      rawData = value;
+      setState(() {});
+    });
   }
 }

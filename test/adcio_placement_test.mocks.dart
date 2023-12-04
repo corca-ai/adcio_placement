@@ -43,7 +43,7 @@ class MockApiClient extends _i1.Mock implements _i3.ApiClient {
     required String? placementId,
     int? placementPositionX,
     int? placementPositionY,
-    required bool? fromAgent,
+    bool? fromAgent,
     int? birthYear,
     String? gender,
     String? area,

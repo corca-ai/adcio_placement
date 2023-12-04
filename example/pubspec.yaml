@@ -38,6 +38,7 @@ dependencies:
   adcio_placement:
     path: ../
   adcio_core: ^0.1.0
+  uuid: ^4.2.1
 
 
 dev_dependencies:

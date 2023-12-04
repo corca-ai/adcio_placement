@@ -2,7 +2,9 @@
 
 import 'package:adcio_core/adcio_core.dart';
 import 'package:adcio_placement/adcio_placement.dart';
+import 'package:example/model/user.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,10 +41,18 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   AdcioSuggestionRawData? rawData;
+  late final User currenctUser;
 
   @override
   void initState() {
     super.initState();
+
+    currenctUser = User(
+      id: const Uuid().v4(),
+      name: 'adcio',
+      birthDate: DateTime(2000, 2, 20),
+      gender: Gender.male,
+    );
 
     ///
     /// call adcioSuggest() here

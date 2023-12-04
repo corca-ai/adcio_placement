@@ -63,7 +63,15 @@ class ApiClient {
     if ([200, 201].contains(response.statusCode)) {
       return AdcioSuggestionRawData.fromJson(response.body);
     } else if (response.statusCode == 400) {
+      throw BadRequestException(
+        message: response.body['message'].toString(),
+      );
+    } else if (response.statusCode == 404 &&
+        response.body['message'] == 12001) {
       throw UnregisteredIdException();
+    } else if (response.statusCode == 404 &&
+        response.body['message'] == 12004) {
+      throw DisabledPlacementException();
     } else {
       throw PlatformException(
         code: 'SYSTEM_ERROR',

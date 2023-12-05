@@ -1,3 +1,8 @@
+## 0.2.0
+
+* Feature: update suggest API call 
+* Feature: add Error case for suggest API call
+
 ## 0.1.4
 
 * Feature: update suggest API call 

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:adcio_analytics/adcio_analytics.dart';
 import 'package:adcio_core/adcio_core.dart';
+import 'package:adcio_placement/src/utils.dart';
 
 import 'api_client.dart';
 import 'api_result.dart';
@@ -25,10 +26,10 @@ import 'api_result.dart';
 /// Additionally, if there are user details such as customerId (similar to userId),
 /// age, gender, and information related to the space like area, as well as placementPosition,
 /// the accuracy of recommendation predictions can be further enhanced.
-Future<AdcioSuggestionRawData> adcioSuggest({
+Future<AdcioSuggestionRawData> adcioCreateSuggestion({
   required String placementId,
   String? baseUrl,
-  String? age,
+  int? birthYear,
   String? area,
   String? customerId,
   String? gender,
@@ -46,11 +47,11 @@ Future<AdcioSuggestionRawData> adcioSuggest({
     deviceId: deviceId ?? AdcioCore.deviceId,
     placementId: placementId,
     fromAgent: false,
-    age: age,
+    birthYear: birthYear,
     area: area,
     customerId: customerId,
-    gender: gender,
-    placementPosX: placementPosition?.dx.toInt(),
-    placementPosY: placementPosition?.dy.toInt(),
+    gender: convertGender(gender)?.name,
+    placementPositionX: placementPosition?.dx.toInt(),
+    placementPositionY: placementPosition?.dy.toInt(),
   );
 }

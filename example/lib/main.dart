@@ -2,7 +2,9 @@
 
 import 'package:adcio_core/adcio_core.dart';
 import 'package:adcio_placement/adcio_placement.dart';
+import 'package:example/model/user.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,19 +41,23 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   AdcioSuggestionRawData? rawData;
+  late final User currenctUser;
+  late final String currentLocation;
 
   @override
   void initState() {
     super.initState();
 
-    ///
-    /// call adcioSuggest() here
-    adcioSuggest(
-      placementId: '67592c00-a230-4c31-902e-82ae4fe71866',
-    ).then((value) {
-      rawData = value;
-      setState(() {});
-    });
+    currenctUser = User(
+      id: const Uuid().v4(),
+      name: 'adcio',
+      birthDate: DateTime(2000, 2, 20),
+      gender: Gender.male,
+    );
+
+    currentLocation = 'Seoul, Korea';
+
+    suggest();
   }
 
   @override
@@ -62,12 +68,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () {
-              adcioSuggest(
-                placementId: '67592c00-a230-4c31-902e-82ae4fe71866',
-              ).then((value) {
-                rawData = value;
-                setState(() {});
-              });
+              suggest();
             },
             icon: const Icon(Icons.refresh),
           ),
@@ -96,5 +97,20 @@ class _HomePageState extends State<HomePage> {
               itemCount: rawData!.suggestions.length,
             ),
     );
+  }
+
+  ///
+  /// call adcioSuggest() here
+  void suggest() {
+    adcioCreateSuggestion(
+      placementId: '67592c00-a230-4c31-902e-82ae4fe71866',
+      customerId: currenctUser.id,
+      birthYear: currenctUser.birthDate.year,
+      gender: currenctUser.gender.name,
+      area: currentLocation,
+    ).then((value) {
+      rawData = value;
+      setState(() {});
+    });
   }
 }

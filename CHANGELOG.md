@@ -1,3 +1,7 @@
+## 0.2.1
+
+* Chore: fix test code
+
 ## 0.2.0
 
 * Feature: update suggest API call 

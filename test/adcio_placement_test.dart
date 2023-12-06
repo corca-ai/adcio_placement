@@ -122,12 +122,12 @@ void main() async {
         sessionId: 'a3e0efcc-bbed-4c73-b001-cd3d0c54e7a6',
         deviceId: '6D79D039-3FE3-4887-B0BC-FDDCBD758C99',
       ),
-      throwsA(isInstanceOf<UnregisteredIdException>()),
+      throwsA(isInstanceOf<DisabledPlacementException>()),
     );
   });
 
   test('When the provided placementId is not registered in the ADCIO service',
-      () {
+      () async {
     expect(
       () => adcioCreateSuggestion(
         placementId: randomUUID,
@@ -139,7 +139,7 @@ void main() async {
     );
   });
 
-  test('When the placementId value is not a UUID', () {
+  test('When the placementId value is not a UUID', () async {
     expect(
       () => adcioCreateSuggestion(
         placementId: notUUID,
@@ -147,7 +147,7 @@ void main() async {
         sessionId: 'a3e0efcc-bbed-4c73-b001-cd3d0c54e7a6',
         deviceId: '6D79D039-3FE3-4887-B0BC-FDDCBD758C99',
       ),
-      throwsA(isInstanceOf<UnregisteredIdException>()),
+      throwsA(isInstanceOf<BadRequestException>()),
     );
   });
 }

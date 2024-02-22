@@ -20,7 +20,7 @@ adcioSuggest(
   AdcioSuggestionRawData adcioSuggestionRaw = result;
 });
 ```
-To learn more about usage of plugin, please visit the [adcio_placement Usage documentation.](https://docs.adcio.ai/en/sdk/flutter/suggestions)
+To learn more about usage of plugin, please visit the [adcio_placement Usage documentation.](https://docs.adcio.ai/en/sdk/suggestions/flutter)
 
 ## Issues and feedback
-If the plugin has issues, bugs, feedback, Please contact <app@corca.ai>.
+If the plugin has issues, bugs, feedback, Please contact <dev@corca.ai>.

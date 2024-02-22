@@ -11,8 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^1.1.0
-  adcio_analytics: ^0.3.0
-  adcio_core: ^0.1.0
+  adcio_analytics: ^1.0.0
+  adcio_core: ^1.0.1
 
 dev_dependencies:
   flutter_test:

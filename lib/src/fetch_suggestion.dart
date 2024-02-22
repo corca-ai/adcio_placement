@@ -43,8 +43,8 @@ Future<AdcioSuggestionRawData> adcioCreateSuggestion({
   AdcioAnalytics.clearImpressionHistory();
 
   return client.suggestion(
-    sessionId: sessionId ?? AdcioCore.sessionId,
-    deviceId: deviceId ?? AdcioCore.deviceId,
+    sessionId: sessionId ?? SessionIdentifier().loadId(),
+    deviceId: deviceId ?? await DeviceIdentifier().loadId(),
     placementId: placementId,
     fromAgent: false,
     birthYear: birthYear,

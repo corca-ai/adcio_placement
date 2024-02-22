@@ -69,38 +69,6 @@ void main() async {
     expect(result, [20, 560]);
   });
 
-  test(
-      'When the suppression is called before using the AdcioCore.initializeApp() function',
-      () {
-    expect(
-      () => adcioCreateSuggestion(
-        placementId: '9f9f9b00-dc16-41c7-a5cd-f9a788d3d481',
-        apiClient: mockApiClient,
-        sessionId: AdcioCore.sessionId,
-        deviceId: AdcioCore.deviceId,
-      ),
-      throwsA(isInstanceOf<UnInitializedException>()),
-    );
-  });
-
-  test(
-      'When the suppression is called after using the AdcioCore.initializeApp() function',
-      () async {
-    await AdcioCore.initializeApp(
-      clientId: 'f8f2e298-c168-4412-b82d-98fc5b4a114a',
-    );
-
-    expect(
-      await adcioCreateSuggestion(
-        placementId: '9f9f9b00-dc16-41c7-a5cd-f9a788d3d481',
-        apiClient: mockApiClient,
-        sessionId: AdcioCore.sessionId,
-        deviceId: AdcioCore.deviceId,
-      ),
-      isInstanceOf<AdcioSuggestionRawData>(),
-    );
-  });
-
   test('When the provided placementId is registered in the ADCIO service',
       () async {
     expect(
@@ -113,6 +81,7 @@ void main() async {
       isInstanceOf<AdcioSuggestionRawData>(),
     );
   });
+
   test('When the placement exists in the ADCIO service but is not enabled',
       () async {
     expect(

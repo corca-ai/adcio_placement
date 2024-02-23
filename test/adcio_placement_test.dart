@@ -1,11 +1,8 @@
-@GenerateNiceMocks([MockSpec<ApiClient>()])
-import 'package:adcio_core/adcio_core.dart';
 import 'package:adcio_placement/adcio_placement.dart';
 import 'package:adcio_placement/src/api_client.dart';
 import 'package:adcio_placement/src/error.dart';
 import 'package:adcio_placement/src/utils.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'adcio_placement_test.mocks.dart';

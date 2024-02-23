@@ -1,3 +1,6 @@
+## 1.0.0
+* Feature: updated to reflect the core version up
+
 ## 0.2.1
 
 * Chore: fix test code
